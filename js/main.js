@@ -1,10 +1,6 @@
 // Функция генерации случайного числа с плавающей точкой
 
-const randomNumber = (min, max) => {
-  if (min >=0 && max >= 0 && max > min) {
-    return (Math.random() * (max - min) + min).toFixed(4);
-  }
-
+const randomNumber = (min, max, numberQuantity) => {
   if (min < 0 || max < 0) {
     return 'Числа должны быть БОЛЬШЕ нуля!';
   }
@@ -14,20 +10,20 @@ const randomNumber = (min, max) => {
   }
 
   if (max < min) {
-    const reversSum = min + max;
-    const reversMax = reversSum - max;
-    const reversMin = reversSum - min;
-    max = reversMax;
-    min = reversMin;
-
-    return (Math.random() * (max - min) + min).toFixed(4);
+    const reverseMin = min;
+    min = max;
+    max = reverseMin;
   }
+
+  return (Math.random() * (max - min) + min).toFixed(numberQuantity);
 };
 
-randomNumber(100, 1.99);
+randomNumber(1, 1.99, 4);
 
-// console.log(randomResult);
+// console.log(randomNumber(1, 1.99, 4));
 
-// const temp = min;
-// min = max;
-// max = temp;
+// const reversSum = min + max;
+// const reversMax = reversSum - max;
+// const reversMin = reversSum - min;
+// max = reversMax;
+// min = reversMin;
