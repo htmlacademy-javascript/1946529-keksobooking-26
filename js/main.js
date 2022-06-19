@@ -1,81 +1,4 @@
-// Функция генерации ЦЕЛОГО случайного числа
-
-const randomInteger = (min, max) => {
-  if (min < 0 || max < 0) {
-    return 'Числа должны быть БОЛЬШЕ нуля!';
-  }
-
-  if (min === max) {
-    return 'Максимальное значение должно быть больше минмиального!';
-  }
-
-  if (max < min) {
-    const reverseMin = min;
-    min = max;
-    max = reverseMin;
-  }
-
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-};
-
-randomInteger(1, 3);
-
-// Функция генерации случайного числа с плавающей точкой
-
-const randomFloat = (min, max, numberQuantity) => {
-  if (min < 0 || max < 0) {
-    return 'Числа должны быть БОЛЬШЕ нуля!';
-  }
-
-  if (min === max) {
-    return 'Максимальное значение должно быть больше минмиального!';
-  }
-
-  if (max < min) {
-    const reverseMin = min;
-    min = max;
-    max = reverseMin;
-  }
-
-  return (Math.random() * (max - min) + min).toFixed(numberQuantity);
-};
-
-randomFloat(1, 1.99, 4);
-
-// Генерируем целочисленные индексы для фото
-
-const PHOTOS_COUNT = 10;
-
-const imageIndex = (count) => {
-
-  const imageArr = [];
-
-  while (imageArr.length < count) {
-
-    let temp = Math.floor(Math.random() * (count + 1));
-
-    if (temp < PHOTOS_COUNT) {
-      temp = `0${  temp}`;
-    } else {
-      temp = `${PHOTOS_COUNT}`;
-    }
-
-    if (!imageArr.includes(temp)) {
-      imageArr.push(temp);
-    }
-
-    const deleteNull = imageArr.indexOf('00');
-    if (deleteNull !== -1) {
-      imageArr.splice(deleteNull, 1);
-    }
-
-  }
-  return imageArr;
-};
-
-const imageArrayIndex = imageIndex(PHOTOS_COUNT);
-
-// Генерируем случайные непвоторяющиеся индексы фотографий
+// Массив "Удобства для гостей"
 
 const FEATURES_ARRAY = [
   'wifi',
@@ -85,31 +8,6 @@ const FEATURES_ARRAY = [
   'elevator',
   'conditioner'
 ];
-
-const featuresArrayLength = FEATURES_ARRAY.length;
-
-const spliceFeaturesArray = function () {
-  return FEATURES_ARRAY.slice(randomInteger(0, 3), randomInteger(4, featuresArrayLength));
-};
-
-spliceFeaturesArray();
-
-// console.log(spliceFeaturesArray());
-
-// const randomFeatures = () => {
-
-//   const featuresArr = [];
-//   const featuresArrLength = randomInteger(1, FEATURES_ARRAY.length);
-
-//   for (let i = 0; i < featuresArrLength; i++) {
-
-//     const temp = FEATURES_ARRAY.shift();
-//     featuresArr.push(temp);
-//   }
-//     return featuresArr;
-// };
-
-// const randomFeaturesArray = randomFeatures();
 
 // Заголовки обектов
 
@@ -167,6 +65,105 @@ const CHECK_IN_OUT_TIME = [
   '14:00'
 ];
 
+const featuresArrayLength = FEATURES_ARRAY.length;
+
+const randomBeginIndexFrom = 0;
+const randomBeginIndexTo = 3;
+const randomEndIndexFrom = 4;
+
+const PHOTOS_COUNT = 10;
+
+const OBJECT_COUNT = 10;
+
+// Функция генерации ЦЕЛОГО случайного числа
+
+const randomInteger = (min, max) => {
+  if (min < 0 || max < 0) {
+    return 'Числа должны быть БОЛЬШЕ нуля!';
+  }
+
+  if (min === max) {
+    return 'Максимальное значение должно быть больше минмиального!';
+  }
+
+  if (max < min) {
+    const reverseMin = min;
+    min = max;
+    max = reverseMin;
+  }
+
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};
+
+randomInteger(1, 3);
+
+// Функция генерации случайного числа с плавающей точкой
+
+const randomFloat = (min, max, numberQuantity) => {
+  if (min < 0 || max < 0) {
+    return 'Числа должны быть БОЛЬШЕ нуля!';
+  }
+
+  if (min === max) {
+    return 'Максимальное значение должно быть больше минмиального!';
+  }
+
+  if (max < min) {
+    const reverseMin = min;
+    min = max;
+    max = reverseMin;
+  }
+
+  return (Math.random() * (max - min) + min).toFixed(numberQuantity);
+};
+
+randomFloat(1, 1.99, 4);
+
+// Генерируем целочисленные индексы для фото
+
+const imageIndex = (count) => {
+
+  const imageArr = [];
+
+  while (imageArr.length < count) {
+
+    let temp = Math.floor(Math.random() * (count + 1));
+
+    if (temp < PHOTOS_COUNT) {
+      temp = `0${  temp}`;
+    } else {
+      temp = `${PHOTOS_COUNT}`;
+    }
+
+    if (!imageArr.includes(temp)) {
+      imageArr.push(temp);
+    }
+
+    const deleteNull = imageArr.indexOf('00');
+    if (deleteNull !== -1) {
+      imageArr.splice(deleteNull, 1);
+    }
+
+  }
+  return imageArr;
+};
+
+const imageArrayIndex = imageIndex(PHOTOS_COUNT);
+
+// Генерируем случайные непвоторяющиеся индексы фотографий
+
+const spliceFeaturesArray = function () {
+  return FEATURES_ARRAY.slice(randomInteger(randomBeginIndexFrom, randomBeginIndexTo), randomInteger(randomEndIndexFrom, featuresArrayLength));
+};
+
+spliceFeaturesArray();
+
+const spliceObjectPhotos = function () {
+  return OBJECTS_PHOTOS.slice(randomInteger(randomBeginIndexFrom, OBJECTS_PHOTOS.length - 1));
+};
+
+spliceObjectPhotos();
+
 // Генерируем жилые объекты
 
 const bookingObject = () => {
@@ -191,7 +188,7 @@ const bookingObject = () => {
     checkout: CHECK_IN_OUT_TIME[randomInteger(0, CHECK_IN_OUT_TIME.length - 1)],
     features: spliceFeaturesArray(),
     description: OBJECTS_DESCRIPTIONS[randomInteger(0, OBJECTS_DESCRIPTIONS.length - 1)],
-    photos: OBJECTS_PHOTOS[randomInteger(0, OBJECTS_PHOTOS.length - 1)],
+    photos: spliceObjectPhotos(),
   };
 
   return {
@@ -201,7 +198,6 @@ const bookingObject = () => {
   };
 };
 
-const OBJECT_COUNT = 10;
 /*eslint-disable */
 const listOfBookingObjects = Array.from({length: OBJECT_COUNT}, bookingObject);
 /*eslint-enable */
