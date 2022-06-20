@@ -65,11 +65,11 @@ const CHECK_IN_OUT_TIME = [
   '14:00'
 ];
 
-const featuresArrayLength = FEATURES_ARRAY.length;
+const FEATURES_ARRAY_LENGTH = FEATURES_ARRAY.length;
 
-const randomBeginIndexFrom = 0;
-const randomBeginIndexTo = 3;
-const randomEndIndexFrom = 4;
+const RANDOM_BEGIN_INDEX_FROM = 0;
+const RANDOM_BEGIN_INDEX_TO = 3;
+const RANDOM_END_INDEX_FROM = 4;
 
 const PHOTOS_COUNT = 10;
 
@@ -153,13 +153,13 @@ const imageArrayIndex = imageIndex(PHOTOS_COUNT);
 // Генерируем случайные непвоторяющиеся индексы фотографий
 
 const spliceFeaturesArray = function () {
-  return FEATURES_ARRAY.slice(randomInteger(randomBeginIndexFrom, randomBeginIndexTo), randomInteger(randomEndIndexFrom, featuresArrayLength));
+  return FEATURES_ARRAY.slice(randomInteger(RANDOM_BEGIN_INDEX_FROM, RANDOM_BEGIN_INDEX_TO), randomInteger(RANDOM_END_INDEX_FROM, FEATURES_ARRAY_LENGTH));
 };
 
 spliceFeaturesArray();
 
 const spliceObjectPhotos = function () {
-  return OBJECTS_PHOTOS.slice(randomInteger(randomBeginIndexFrom, OBJECTS_PHOTOS.length - 1));
+  return OBJECTS_PHOTOS.slice(randomInteger(RANDOM_BEGIN_INDEX_FROM, OBJECTS_PHOTOS.length - 1));
 };
 
 spliceObjectPhotos();
