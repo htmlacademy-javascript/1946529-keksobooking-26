@@ -41,7 +41,7 @@ const imageArrayIndex = imageIndex(PHOTOS_COUNT);
 // Генерируем случайные непвоторяющиеся индексы фотографий
 
 const spliceFeaturesArray = function () {
-  return FEATURES_ARRAY.slice(randomInteger(RANDOM_BEGIN_INDEX_FROM, RANDOM_BEGIN_INDEX_TO), randomInteger(RANDOM_END_INDEX_FROM, FEATURES_ARRAY_LENGTH));
+  return FEATURES_ARRAY.slice(randomInteger(RANDOM_BEGIN_INDEX_FROM, RANDOM_BEGIN_INDEX_TO), randomInteger(RANDOM_END_INDEX_FROM, FEATURES_ARRAY_LENGTH - 1));
 };
 
 spliceFeaturesArray();
