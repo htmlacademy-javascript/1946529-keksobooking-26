@@ -6,7 +6,6 @@ import {RANDOM_BEGIN_INDEX_FROM} from './data.js';
 import {RANDOM_BEGIN_INDEX_TO} from './data.js';
 import {RANDOM_END_INDEX_FROM} from './data.js';
 import {PHOTOS_COUNT} from './data.js';
-
 // Генерируем целочисленные индексы для фото
 
 const imageIndex = (count) => {
