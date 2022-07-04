@@ -1,4 +1,5 @@
 import {listOfBookingObjects} from './main.js';
+import {OBJECTS_TYPES_RUS} from './data.js';
 
 const cardTemplate = document.querySelector('#card');
 const parentBlock = document.querySelector('.map__canvas');
@@ -9,6 +10,10 @@ const clonedContent = cardContent.cloneNode(true);
 const bookingObjectArray = listOfBookingObjects();
 
 // console.log(objectItem.author.avatar);
+
+const objectType = (type) => OBJECTS_TYPES_RUS[type];
+
+// console.log(objectType(bookingObjectArray[1].offer.type));
 
 const createObject = (objectItem) => {
   parentBlock.appendChild(clonedContent);
@@ -33,7 +38,7 @@ const createObject = (objectItem) => {
   price.insertAdjacentText('afterbegin', objectItem.offer.price);
   price.insertAdjacentElement('beforeend', priceSpan);
   priceSpan.textContent = ' ₽/ночь';
-  houseType.textContent = objectItem.offer.type;
+  houseType.textContent = objectType(objectItem.offer.type);
   roomsCount.textContent = `${objectItem.offer.rooms} комнаты для ${objectItem.offer.guests} гостей`;
   checkInOutTime.textContent = `Заезд после ${objectItem.offer.checkin}, выезд до ${objectItem.offer.checkout}`;
 

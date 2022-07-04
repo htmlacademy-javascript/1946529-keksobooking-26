@@ -48,12 +48,20 @@ const OBJECTS_DESCRIPTIONS = [
 // Типы объектов
 
 const OBJECTS_TYPES = [
-  'Дворец',
-  'Квартира',
-  'Дом целиком',
-  'Бунгало ',
-  'Отель'
+  'palace',
+  'flat',
+  'house',
+  'bungalow',
+  'hotel'
 ];
+
+const OBJECTS_TYPES_RUS = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalow: 'Бунгало',
+  hotel: 'Отель'
+};
 
 // Массив фотографий
 
@@ -127,3 +135,4 @@ export {RANDOM_BEGIN_INDEX_FROM};
 export {RANDOM_BEGIN_INDEX_TO};
 export {RANDOM_END_INDEX_FROM};
 export {PHOTOS_COUNT};
+export {OBJECTS_TYPES_RUS};
