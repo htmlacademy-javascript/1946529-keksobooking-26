@@ -37,7 +37,7 @@ const OBJECTS_DESCRIPTIONS = [
   'Это помещение ещё лучше',
   'А это помещение просто замечательное!',
   'Бюджетные аппартаменты',
-  'Аппартаменты которые заставят вас захоткть вернуться',
+  'Аппартаменты которые заставят вас захотеть вернуться',
   'Лучшиее жильё для молодожёнов',
   'То что подходит именно вам',
   'Вы даже представить себе не можете насколько тут прекрасно!',
@@ -51,9 +51,17 @@ const OBJECTS_TYPES = [
   'palace',
   'flat',
   'house',
-  'bungalow ',
+  'bungalow',
   'hotel'
 ];
+
+const OBJECTS_TYPES_RUS = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalow: 'Бунгало',
+  hotel: 'Отель'
+};
 
 // Массив фотографий
 
@@ -127,3 +135,4 @@ export {RANDOM_BEGIN_INDEX_FROM};
 export {RANDOM_BEGIN_INDEX_TO};
 export {RANDOM_END_INDEX_FROM};
 export {PHOTOS_COUNT};
+export {OBJECTS_TYPES_RUS};
