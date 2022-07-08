@@ -63,6 +63,14 @@ const OBJECTS_TYPES_RUS = {
   hotel: 'Отель'
 };
 
+const OBJECTS_TYPES_PRICE = {
+  palace: '10000',
+  flat: '1000',
+  house: '5000',
+  bungalow: '0',
+  hotel: '3000'
+};
+
 // Массив фотографий
 
 const OBJECTS_PHOTOS = [
@@ -136,3 +144,4 @@ export {RANDOM_BEGIN_INDEX_TO};
 export {RANDOM_END_INDEX_FROM};
 export {PHOTOS_COUNT};
 export {OBJECTS_TYPES_RUS};
+export {OBJECTS_TYPES_PRICE};
