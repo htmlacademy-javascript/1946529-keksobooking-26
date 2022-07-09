@@ -14,8 +14,12 @@ const timeOut = adForm.querySelector('#timeout');
 const optionRooms = adForm.querySelector('#room_number');
 const optionGuests = adForm.querySelector('#capacity');
 
+const ROOMS_MAX_VALUE = 100;
+const NOT_FOR_GUESTS = 0;
+
+
 // Создаём функцию для обекта со значением цены
-const placeholderPrice = (price) => OBJECTS_TYPES_PRICE[price];
+// const placeholderPrice = (priceObject) => OBJECTS_TYPES_PRICE[priceObject].price;
 
 const disableForms = () => {
   adForm.setAttribute('disabled', 'disabled');
@@ -56,26 +60,23 @@ timeOut.addEventListener('change', () => {
 // По событию change меняем значение placeholder
 
 type.addEventListener('change', () => {
-  priceField.placeholder = placeholderPrice(type.value);
+  priceField.placeholder = OBJECTS_TYPES_PRICE[type.value].price;
 });
 
 pristine.addValidator(optionRooms, () => {
-  /*eslint-disable */
-  if (optionRooms.value >= optionGuests.value
-      && optionGuests.value != 0
-      && optionRooms.value != 100)
+  if (Number(optionRooms.value) >= optionGuests.value
+      && Number(optionGuests.value) !== NOT_FOR_GUESTS
+      && Number(optionRooms.value) !== ROOMS_MAX_VALUE)
   {
     return true;
   }
-  if (optionRooms.value == 100 && optionGuests.value == 0) {
+  if (Number(optionRooms.value) === ROOMS_MAX_VALUE
+    && Number(optionGuests.value) === NOT_FOR_GUESTS) {
     return true;
   }
-  /*eslint-enable */
   return false;
 
-}, 'Количество комнат некорректно по отношению к количеству гостей');
-
-// console.log(roomsArray);
+}, 'Количество комнат должно быть больше или равно количеству гостей. 100 комнат только "НЕ для гостей"');
 
 adForm.addEventListener('submit', (evt) => {
   evt.preventDefault();

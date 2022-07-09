@@ -1,5 +1,5 @@
 import {listOfBookingObjects} from './main.js';
-import {OBJECTS_TYPES_RUS} from './data.js';
+import {OBJECTS_TYPES_PRICE} from './data.js';
 
 const cardTemplate = document.querySelector('#card');
 const parentBlock = document.querySelector('.map__canvas');
@@ -9,11 +9,7 @@ const cardContent = cardTemplate.content;
 const clonedContent = cardContent.cloneNode(true);
 const bookingObjectArray = listOfBookingObjects();
 
-// console.log(objectItem.author.avatar);
-
-const objectType = (type) => OBJECTS_TYPES_RUS[type];
-
-// console.log(objectType(bookingObjectArray[1].offer.type));
+// const objectType = (type) => OBJECTS_TYPES_PRICE[type].rus;
 
 const createObject = (objectItem) => {
   parentBlock.appendChild(clonedContent);
@@ -38,20 +34,11 @@ const createObject = (objectItem) => {
   price.insertAdjacentText('afterbegin', objectItem.offer.price);
   price.insertAdjacentElement('beforeend', priceSpan);
   priceSpan.textContent = ' ₽/ночь';
-  houseType.textContent = objectType(objectItem.offer.type);
+  houseType.textContent = OBJECTS_TYPES_PRICE[objectItem.offer.type].rus;
   roomsCount.textContent = `${objectItem.offer.rooms} комнаты для ${objectItem.offer.guests} гостей`;
   checkInOutTime.textContent = `Заезд после ${objectItem.offer.checkin}, выезд до ${objectItem.offer.checkout}`;
 
   if (featuresItems.length > objectItem.offer.features.length && objectItem.offer.features.length > 0) {
-    // featuresItems.forEach((item) => {
-    //   const isExist = objectItem.offer.features.some(
-    //     (feature) => item.classList.contains(`popup__feature--${  feature}`),
-    //   );
-
-    //   if (!isExist) {
-    //     item.remove();
-    //   }
-    // });
     featuresList.textContent = '';
     objectItem.offer.features.forEach((index) => {
       const newItem = document.createElement('li');
@@ -80,3 +67,4 @@ const createObject = (objectItem) => {
 
 export {createObject};
 export {bookingObjectArray};
+// console.log(objectType(bookingObjectArray[1].offer.type));
