@@ -55,16 +55,44 @@ const OBJECTS_TYPES = [
   'hotel'
 ];
 
-const OBJECTS_TYPES_RUS = {
-  palace: 'Дворец',
-  flat: 'Квартира',
-  house: 'Дом',
-  bungalow: 'Бунгало',
-  hotel: 'Отель'
+// const OBJECTS_TYPES_RUS = {
+//   palace: 'Дворец',
+//   flat: 'Квартира',
+//   house: 'Дом',
+//   bungalow: 'Бунгало',
+//   hotel: 'Отель'
+// };
+
+const OBJECTS_TYPES_PRICE = {
+  palace: {
+    rus: 'Дворец',
+    price: '10000'
+  },
+
+  flat: {
+    rus: 'Квартира',
+    price: '1000'
+  },
+
+  house: {
+    rus: 'Дом',
+    price: '5000'
+  },
+
+  bungalow: {
+    rus: 'Бунгало',
+    price: '0'
+  },
+
+  hotel: {
+    rus: 'Отель',
+    price: '3000'
+  }
 };
 
-// Массив фотографий
+// console.log(OBJECTS_TYPES_PRICE.palace.rus);
 
+// Массив фотографий
 const OBJECTS_PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
@@ -135,4 +163,5 @@ export {RANDOM_BEGIN_INDEX_FROM};
 export {RANDOM_BEGIN_INDEX_TO};
 export {RANDOM_END_INDEX_FROM};
 export {PHOTOS_COUNT};
-export {OBJECTS_TYPES_RUS};
+// export {OBJECTS_TYPES_RUS};
+export {OBJECTS_TYPES_PRICE};
