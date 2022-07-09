@@ -1,5 +1,8 @@
 import {OBJECTS_TYPES_PRICE} from './data.js';
 
+const ROOMS_MAX_VALUE = 100;
+const NOT_FOR_GUESTS = 0;
+
 const adForm = document.querySelector('.ad-form');
 const mapFiltres = document.querySelector('.map__filters');
 const filtresChildren = [...mapFiltres.children];
@@ -13,10 +16,6 @@ const timeIn = adForm.querySelector('#timein');
 const timeOut = adForm.querySelector('#timeout');
 const optionRooms = adForm.querySelector('#room_number');
 const optionGuests = adForm.querySelector('#capacity');
-
-const ROOMS_MAX_VALUE = 100;
-const NOT_FOR_GUESTS = 0;
-
 
 // Создаём функцию для обекта со значением цены
 // const placeholderPrice = (priceObject) => OBJECTS_TYPES_PRICE[priceObject].price;
