@@ -57,9 +57,18 @@ timeOut.addEventListener('change', () => {
 });
 
 // По событию change меняем значение placeholder
+const sliderMin = () => Number(OBJECTS_TYPES_PRICE[type.value].price);
+
+const priceValueCallBack = (el) => {
+  priceField.placeholder = sliderMin();
+  el = sliderMin();
+  // console.log(el);
+  priceField.min = el;
+  return el;
+};
 
 type.addEventListener('change', () => {
-  priceField.placeholder = OBJECTS_TYPES_PRICE[type.value].price;
+  priceValueCallBack(priceField.value);
 });
 
 pristine.addValidator(optionRooms, () => {
@@ -87,5 +96,8 @@ enableForms();
 
 export {disableForms};
 export {enableForms};
+export {priceField};
+export {type};
 export {adForm};
-
+export {sliderMin};
+export {priceValueCallBack};
