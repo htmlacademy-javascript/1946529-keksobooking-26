@@ -1,16 +1,20 @@
-import './array-generating.js';
-import './cards.js';
-import './map.js';
-import './slider.js';
-import {listOfBookingObjects} from './data.js';
+import { activateFormValidation } from './validation.js';
+import { setAllFormsDisabled, setAdFormEnabled, setMapFiltersFormEnabled } from './form.js';
+import { activateMap } from './map.js';
+import { activateSlider } from './slider.js';
+import { fetchOffers } from './api.js';
+import { initFilters } from './filter.js';
+import { initUploadAvatar, initUploadHousePic } from './upload-images.js';
+import { showAlert } from './messages.js';
 
-// import {adForm} from './form.js';
+setAllFormsDisabled();
 
-// createObject(bookingObjectArray[1]);
+fetchOffers((offers) => {
+  activateMap(setAdFormEnabled, offers);
+  initFilters(offers);
+}, setMapFiltersFormEnabled, (error) => showAlert(`Ошибка загрузки данных, попробуйте обновить страницу. ${error}`));
 
-/*eslint-disable */
-console.log(listOfBookingObjects());
-// console.log(createObject(bookingObjectArray[1]));
-/*eslint-enable */
-
-export {listOfBookingObjects};
+initUploadAvatar();
+initUploadHousePic();
+activateSlider();
+activateFormValidation();

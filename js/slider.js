@@ -1,44 +1,46 @@
-import {OBJECTS_TYPES_PRICE} from './data.js';
-import {priceField} from './form.js';
-import {type} from './form.js';
-// import {sliderMin} from './form.js';
-import {priceValueCallBack} from './form.js';
+const sliderElement = document.querySelector('.ad-form__slider');
+const handlePriceInput = document.querySelector('#price');
 
-const slider = document.querySelector('.ad-form__slider');
-
-noUiSlider.create(slider, {
-  start: Number(OBJECTS_TYPES_PRICE[type.value].price),
-  connect: true,
-  range: {
-    'min': 0,
-    'max': 100000
-  },
-  step: 100,
-  format: {
-    to: function (value) {
-      return value.toFixed(0);
-    },
-    from: function (value) {
-      return parseFloat(value);
-    },
-  }
-});
-
-slider.noUiSlider.on('update', (values) => {
-  priceField.value = values;
-});
-
-type.addEventListener('change', () => {
-  slider.noUiSlider.updateOptions({
+const updateSliderOptions = (min) => {
+  sliderElement.noUiSlider.updateOptions({
     range: {
-      min: priceValueCallBack(),
+      min: Number(min),
       max: 100000,
     },
-    start: priceValueCallBack(),
     step: 1
   });
-});
+  sliderElement.noUiSlider.set(min);
+};
 
-priceField.addEventListener('change', () => {
-  slider.noUiSlider.set(priceField.value);
-});
+const onSliderMove = () => {
+  sliderElement.noUiSlider.set(handlePriceInput.value);
+};
+
+const activateSlider = () => {
+  noUiSlider.create(sliderElement, {
+    range: {
+      min: Number(handlePriceInput.min),
+      max: Number(handlePriceInput.max),
+    },
+    start: Number(handlePriceInput.min),
+    step: 100,
+    connect: 'lower',
+    format: {
+      to: (value) => {
+        if (!Number.isInteger(value)) {
+          return value.toFixed(0);
+        }
+        return value.toFixed(0);
+      },
+      from: (value) => parseFloat(value),
+    },
+  });
+
+  sliderElement.noUiSlider.on('slide', () => {
+    handlePriceInput.value = sliderElement.noUiSlider.get();
+  });
+
+  handlePriceInput.addEventListener('input', onSliderMove);
+};
+
+export { activateSlider, updateSliderOptions };

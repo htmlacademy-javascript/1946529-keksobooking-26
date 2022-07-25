@@ -1,69 +1,88 @@
-import {enableForms} from './form.js';
-import {createObject} from './cards.js';
-import {bookingObjectArray} from './cards.js';
-import {disableForms} from './form.js';
-disableForms();
+import { createCard } from './cards.js';
 
-const addressField = document.querySelector('#address');
-const MAX_FLOAT_COUNT = 5;
-const TOKYO_LAT = 35.6895;
-const TOKYO_LNG = 139.692;
-const MAP_ZOOM = 14;
+const ZOOM_LEVEL = 13;
+const START_MAIN_PIN_POSITION = {
+  lat: 35.681729,
+  lng: 139.753927,
+};
 
-addressField.setAttribute('readonly', 'readonly');
+const addressInputElement = document.querySelector('#address');
+const checkBoxFeatures = document.querySelectorAll('.map__checkbox');
 
-const mapTokyo = L.map('map-canvas')
-  .on('load', () => {
-    // console.log('Карта инициализирована');
-  }, enableForms())
-  .setView({
-    lat: TOKYO_LAT,
-    lng: TOKYO_LNG,
-  }, MAP_ZOOM);
+let map = null;
+let markerGroup = null;
+let offersCopy = null;
 
-L.tileLayer(
-  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-  {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  },
-).addTo(mapTokyo).bindPopup(createObject(bookingObjectArray[1]));
-
-const mainPinIcon = L.icon({
-  iconUrl: './img/main-pin.svg',
+const mainRedIcon = L.icon({
+  iconUrl: '../../img/main-pin.svg',
   iconSize: [52, 52],
   iconAnchor: [26, 52],
 });
-
-const pinIcon = L.icon({
-  iconUrl: './img/pin.svg',
-  iconSize: [52, 52],
-  iconAnchor: [26, 52],
+const blueIcon = L.icon({
+  iconUrl: '../../img/pin.svg',
+  iconSize: [40, 40],
+  iconAnchor: [20, 40],
 });
 
-const marker = L.marker(
-  {
-    lat: TOKYO_LAT,
-    lng: TOKYO_LNG,
-  },
+const markerRed = L.marker(
+  START_MAIN_PIN_POSITION,
   {
     draggable: true,
-    icon: mainPinIcon,
-  }
+    icon: mainRedIcon,
+  },
 );
 
-marker.addTo(mapTokyo);
-
-marker.on('moveend', (evt) => {
-  addressField.value = `${evt.target.getLatLng().lat.toFixed(MAX_FLOAT_COUNT)}, ${evt.target.getLatLng().lng.toFixed(MAX_FLOAT_COUNT)}`;
-});
-
-bookingObjectArray.forEach((object) => {
-  const markerRegular = L.marker(
-    object.location,
+const createMarker = ((offer) => {
+  const markerBlue = L.marker(
+    offer.location,
     {
-      icon: pinIcon,
+      icon: blueIcon,
     },
   );
-  // console.log(createObject(object));
-  markerRegular.addTo(mapTokyo).bindPopup(createObject(object));
+  markerBlue
+    .addTo(markerGroup)
+    .bindPopup(createCard(offer));
+  return markerBlue;
 });
+
+const renderMarkers = (offers) => {
+  map.closePopup();
+  markerGroup.clearLayers();
+  offers.forEach(createMarker);
+};
+
+const resetMap = () => {
+  map.closePopup();
+  checkBoxFeatures.forEach((item) => {
+    item.checked = false;
+  });
+  addressInputElement.value = `${START_MAIN_PIN_POSITION.lat.toFixed(5)},${START_MAIN_PIN_POSITION.lng.toFixed(5)}`;
+  markerRed.setLatLng(START_MAIN_PIN_POSITION);
+  map.setView(START_MAIN_PIN_POSITION, ZOOM_LEVEL);
+  renderMarkers(offersCopy.slice(0, 10));
+};
+
+const activateMap = (onLoad, offers) => {
+  offersCopy = offers;
+  map = L.map('map-canvas')
+    .on('load', onLoad)
+    .setView(START_MAIN_PIN_POSITION, ZOOM_LEVEL);
+  L.tileLayer(
+    'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    },
+  ).addTo(map);
+
+  markerRed.addTo(map);
+  markerRed.on('drag', (evt) => {
+    const coordinates = evt.target.getLatLng();
+    addressInputElement.value = `${coordinates.lat.toFixed(5)},${coordinates.lng.toFixed(5)}`;
+  });
+
+  markerGroup = L.layerGroup();
+  markerGroup.addTo(map);
+  renderMarkers(offers.slice(0, 10));
+};
+
+export { renderMarkers, activateMap, resetMap };
