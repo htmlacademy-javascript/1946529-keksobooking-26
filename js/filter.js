@@ -50,20 +50,20 @@ const filterOffer = (offers, rerenderMarkers) => {
 
   const filteredArray = [];
 
-    for (const offer of offers) {
-      if (filteredArray.length >= OFFERS_COUNT) {
-        break;
-      }
-      if (
+  for (const offer of offers) {
+    if (filteredArray.length >= OFFERS_COUNT) {
+      break;
+    }
+    if (
       filterByHouseType(offer.offer.type) &&
       filterByPrice(offer.offer.price) &&
       filterByRoomsCount(offer.offer.rooms) &&
       filterByGuestsCount(offer.offer.guests) &&
       filterByFeatures(offer.offer.features)
-      ) {
-        filteredArray.push(offer);
-      }
+    ) {
+      filteredArray.push(offer);
     }
+  }
 
   rerenderMarkers(filteredArray);
 };
