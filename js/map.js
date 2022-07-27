@@ -64,6 +64,7 @@ const resetMap = () => {
 
 const activateMap = (onLoad, offers) => {
   offersCopy = offers;
+  addressInputElement.value = `${START_MAIN_PIN_POSITION.lat.toFixed(5)},${START_MAIN_PIN_POSITION.lng.toFixed(5)}`;
   map = L.map('map-canvas')
     .on('load', onLoad)
     .setView(START_MAIN_PIN_POSITION, ZOOM_LEVEL);
