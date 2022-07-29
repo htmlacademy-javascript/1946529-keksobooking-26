@@ -3,6 +3,8 @@ import { updateSliderOptions } from './slider.js';
 import { resetValidation } from './validation.js';
 import { resetHousePreviews } from './upload-images.js';
 
+const DEFAULT_VALUE = 'any';
+
 const addFormElement = document.querySelector('.ad-form');
 const resetAllButtonElement = document.querySelector('.ad-form__reset');
 const adFormInputElements = document.querySelectorAll('.ad-form fieldset');
@@ -14,22 +16,22 @@ const mapFiltersContainerElement = document.querySelector('.map__filters');
 const setAllFormsDisabled = () => {
   addFormElement.classList.add('ad-form--disabled');
   adFormInputElements.forEach((element) => element.classList.add('ad-form--disabled'));
-  adFormSelectElements.forEach((element) => element.setAttribute('disabled', 'true'));
+  adFormSelectElements.forEach((element) => {element.disabled = true;});
   mapFiltersContainerElement.classList.add('map__filters--disabled');
-  mapSelectElements.forEach((element) => element.setAttribute('disabled', 'true'));
-  mapCheckBoxElements.forEach((element) => element.setAttribute('disabled', 'true'));
+  mapSelectElements.forEach((element) => {element.disabled = true;});
+  mapCheckBoxElements.forEach((element) => {element.disabled = true;});
 };
 
 const setMapFiltersFormEnabled = () => {
   mapFiltersContainerElement.classList.remove('map__filters--disabled');
-  mapSelectElements.forEach((element) => element.removeAttribute('disabled'));
-  mapCheckBoxElements.forEach((element) => element.removeAttribute('disabled'));
+  mapSelectElements.forEach((element) => {element.disabled = false;});
+  mapCheckBoxElements.forEach((element) => {element.disabled = false;});
 };
 
 const setAdFormEnabled = () => {
   addFormElement.classList.remove('ad-form--disabled');
   adFormInputElements.forEach((element) => element.classList.remove('ad-form--disabled'));
-  adFormSelectElements.forEach((element) => element.removeAttribute('disabled'));
+  adFormSelectElements.forEach((element) => {element.disabled = false;});
 };
 
 const resetForm = () => {
@@ -38,12 +40,12 @@ const resetForm = () => {
   resetValidation();
   resetMap();
   resetHousePreviews();
+  document.querySelector('input[id="price"]').placeholder = 'от 0';
 };
 
 const setDefaultValues = () => {
-  document.querySelector('input[id="price"]').placeholder = 'от 0';
   mapSelectElements.forEach((element) => {
-    element.value = 'any';
+    element.value = DEFAULT_VALUE;
   }
   );
 };
