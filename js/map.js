@@ -12,9 +12,7 @@ const START_MAIN_PIN_POSITION = {
 const addressInputElement = document.querySelector('#address');
 const checkBoxFeatures = document.querySelectorAll('.map__checkbox');
 
-const roundingNumbers = (point) => {
-  return `${point.lat.toFixed(COUNT_AFTER_DOT)},${point.lng.toFixed(COUNT_AFTER_DOT)}`;
-}
+const roundingNumbers = (point) => `${point.lat.toFixed(COUNT_AFTER_DOT)},${point.lng.toFixed(COUNT_AFTER_DOT)}`;
 
 let map = null;
 let markerGroup = null;

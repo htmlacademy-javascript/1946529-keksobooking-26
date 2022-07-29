@@ -16,22 +16,22 @@ const mapFiltersContainerElement = document.querySelector('.map__filters');
 const setAllFormsDisabled = () => {
   addFormElement.classList.add('ad-form--disabled');
   adFormInputElements.forEach((element) => element.classList.add('ad-form--disabled'));
-  adFormSelectElements.forEach((element) => element.disabled = true);
+  adFormSelectElements.forEach((element) => {element.disabled = true;});
   mapFiltersContainerElement.classList.add('map__filters--disabled');
-  mapSelectElements.forEach((element) => element.disabled = true);
-  mapCheckBoxElements.forEach((element) => element.disabled = true);
+  mapSelectElements.forEach((element) => {element.disabled = true;});
+  mapCheckBoxElements.forEach((element) => {element.disabled = true;});
 };
 
 const setMapFiltersFormEnabled = () => {
   mapFiltersContainerElement.classList.remove('map__filters--disabled');
-  mapSelectElements.forEach((element) => element.disabled = false);
-  mapCheckBoxElements.forEach((element) => element.disabled = false);
+  mapSelectElements.forEach((element) => {element.disabled = false;});
+  mapCheckBoxElements.forEach((element) => {element.disabled = false;});
 };
 
 const setAdFormEnabled = () => {
   addFormElement.classList.remove('ad-form--disabled');
   adFormInputElements.forEach((element) => element.classList.remove('ad-form--disabled'));
-  adFormSelectElements.forEach((element) => element.disabled = false);
+  adFormSelectElements.forEach((element) => {element.disabled = false;});
 };
 
 const resetForm = () => {
